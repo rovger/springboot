@@ -1,23 +1,23 @@
-package com.rovger.mybatis.controller;
+package com.rovger.controller;
 
-import com.rovger.mybatis.entity.City;
-import com.rovger.mybatis.dao.CityRepository;
+import com.rovger.entity.City;
+import com.rovger.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * @Description: TODO
+ * @Description: 分别根据jpa和mybatis来实现对数据库的访问
  * @Author weijlu
  * @Date 2018/8/24 16:10
  */
 @RestController
-@RequestMapping(value = "/jpa")
+@RequestMapping(value = "/ops")
 public class CityController {
 
     @Autowired
-    CityRepository cityRepository;
+    CityService cityService;
 
     /**
      * 增
@@ -30,10 +30,10 @@ public class CityController {
     public @ResponseBody String addCity(@PathVariable Integer proId, @PathVariable String cityName, @PathVariable String desc) {
         //by jpa method
         /*City city = new City(proId, cityName, desc);
-        cityRepository.save(city);*/
+        cityService.save(city);*/
         //by native sql
-        cityRepository.addCityNative(proId, cityName, desc);
-        City addedCity = cityRepository.findCityByProvinceId(proId);
+        cityService.addCityNative(proId, cityName, desc);
+        City addedCity = cityService.findCityByProvinceId(proId);
         if (addedCity == null) return "no result";
         return addedCity.toString();
     }
@@ -45,13 +45,13 @@ public class CityController {
      */
     @RequestMapping(value = "/delCityById/{id}")
     public @ResponseBody String delCityById(@PathVariable Long id) {
-        cityRepository.deleteById(id);
+        cityService.deleteById(id);
         return "delete success.";
     }
 
     @RequestMapping(value = "/delCityByName/{cityName}")
     public @ResponseBody String delCityByName(@PathVariable String cityName) {
-        cityRepository.deleteByCityName(cityName);
+        cityService.deleteByCityName(cityName);
         return "delete success.";
     }
 
@@ -62,7 +62,7 @@ public class CityController {
      */
     @RequestMapping(value = "/updateById/{id}/{desc}")
     public @ResponseBody String updateById(@PathVariable Long id, @PathVariable String desc) {
-        cityRepository.updateById(id, desc);
+        cityService.updateById(id, desc);
         return "update success.";
     }
 
@@ -72,14 +72,14 @@ public class CityController {
      */
     @RequestMapping(value = "/findAll")
     public @ResponseBody String findAll() {
-        List<City> cityList = cityRepository.findAll();
+        List<City> cityList = cityService.findAll();
         if (cityList.isEmpty()) return "no result.";
         return cityList.toString();
     }
 
     @RequestMapping(value = "/getCity/{cityName}", method = RequestMethod.GET)
     public @ResponseBody String findCityByName(@PathVariable String cityName) {
-        City city = cityRepository.findByCityName(cityName);
+        City city = cityService.findByCityName(cityName);
         if (city == null) return "no result";
         return city.toString();
     }

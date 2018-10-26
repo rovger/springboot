@@ -1,4 +1,4 @@
-package com.rovger.mybatis;
+package com.rovger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * JPA：Java Persistence API(Java持久层API)
  */
 @SpringBootApplication
-@EntityScan(basePackages = "com.rovger.mybatis.entity")
-@EnableJpaRepositories(basePackages= "com.rovger.mybatis.dao")
-public class JPAApplication {
+@EntityScan(basePackages = "com.rovger.entity")
+@EnableJpaRepositories(basePackages= "com.rovger.dao.jpa")
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JPAApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 }

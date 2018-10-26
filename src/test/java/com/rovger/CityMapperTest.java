@@ -1,8 +1,7 @@
 package com.rovger;
 
-import com.rovger.mybatis.JPAApplication;
-import com.rovger.mybatis.entity.City;
-import com.rovger.mybatis.dao.CityRepository;
+import com.rovger.entity.City;
+import com.rovger.dao.jpa.CityRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Date 2018/8/24 16:11
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = JPAApplication.class)
-@EntityScan(basePackages = "com.rovger.mybatis.entity")
-@EnableJpaRepositories(basePackages= "com.rovger.mybatis.dao")
+@SpringBootTest(classes = Application.class)
+@EntityScan(basePackages = "com.rovger.entity")
+@EnableJpaRepositories(basePackages= "com.rovger.dao.jpa")
 public class CityMapperTest {
 
     @Autowired

@@ -1,4 +1,4 @@
-package com.rovger.mybatis.entity;
+package com.rovger.entity;
 
 import lombok.*;
 

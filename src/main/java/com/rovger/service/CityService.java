@@ -1,27 +1,16 @@
-package com.rovger.mybatis.dao;
+package com.rovger.service;
 
-import com.rovger.mybatis.entity.City;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+import com.rovger.entity.City;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @Description: TODO
  * @Author weijlu
- * @Date 2018/8/21 11:01
+ * @Date 2018/10/25 16:54
  */
-@Repository
-public interface CityRepository extends JpaRepository<City, Long> {
+public interface CityService {
 
-    /**
-     * 利用原生SQL查询--根据城市名称，查询城市信息
-     * @param cityName
-     * @return
-     */
-    @Query(value = "select id, province_id, city_name, description from city where city_name = ?1", nativeQuery = true)
     City findByCityName(String cityName);
 
     /**
@@ -44,16 +33,12 @@ public interface CityRepository extends JpaRepository<City, Long> {
      * @param cityName
      * @param desc
      */
-    @Query(value = "insert ignore into city(province_id, city_name, description) value(?1, ?2, ?3)", nativeQuery = true)
-    @Modifying
-    @Transactional
     int addCityNative(int provinceId, String cityName, String desc);
 
     /**
      * 根据cityName删除city
      * @param cityName
      */
-    @Transactional
     void deleteByCityName(String cityName);
 
     /**
@@ -61,9 +46,18 @@ public interface CityRepository extends JpaRepository<City, Long> {
      * @param id
      * @param desc
      */
-    @Query(value = "update city set description = ?2 where id = ?1", nativeQuery = true)
-    @Modifying
-    @Transactional
     void updateById(long id, String desc);
 
+    /**
+     * 根据id删除一条记录
+     * @param id
+     * @return
+     */
+    void deleteById(long id);
+
+    /**
+     * 查询所有记录
+     * @return
+     */
+    List<City> findAll();
 }
