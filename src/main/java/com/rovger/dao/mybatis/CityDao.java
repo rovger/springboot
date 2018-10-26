@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /**
- * @Description: Mybatis方式实现数据库连接
+ * @Description: Mybatis annotation方式实现数据库连接
  * @Author weijlu
  * @Date 2018/10/25 16:28
  */

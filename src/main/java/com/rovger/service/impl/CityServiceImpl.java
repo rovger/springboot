@@ -2,6 +2,7 @@ package com.rovger.service.impl;
 
 import com.rovger.dao.mybatis.CityDao;
 import com.rovger.dao.jpa.CityRepository;
+import com.rovger.dao.mybatis.CityMapper;
 import com.rovger.entity.City;
 import com.rovger.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import java.util.List;
 public class CityServiceImpl implements CityService {
 
     @Autowired
-    private CityRepository cityRepository;
+    private CityRepository cityRepository;//for jpa
     @Autowired
-    private CityDao cityDao;
+    private CityDao cityDao;//for mybatis annotation
+    @Autowired
+    private CityMapper cityMapper;//for mybatis mapper xml
 
     @Override
     public City findByCityName(String cityName) {
@@ -51,7 +54,11 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void updateById(long id, String desc) {
-        cityRepository.updateById(id, desc);
+//        cityRepository.updateById(id, desc);
+        City city = new City();
+        city.setId(id);
+        city.setDescription(desc);
+        cityMapper.updateById(city);
     }
 
     @Override
