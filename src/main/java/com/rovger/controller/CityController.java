@@ -1,6 +1,8 @@
 package com.rovger.controller;
 
+import com.rovger.dubbo.DubboClient;
 import com.rovger.entity.City;
+import com.rovger.entity.Student;
 import com.rovger.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,14 @@ public class CityController {
 
     @Autowired
     CityService cityService;
+    @Autowired
+    DubboClient clientService;
+
+    @RequestMapping(value = "/getStudent/{id}", method = RequestMethod.GET)
+    public @ResponseBody String getStudent(@PathVariable int id) {
+        Student student = clientService.getStudent(id);
+        return student.toString();
+    }
 
     /**
      * 增
