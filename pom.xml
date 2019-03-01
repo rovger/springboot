@@ -50,6 +50,12 @@
 			<version>1.3.2</version>
 		</dependency>
 
+		<!-- SpringBoot rabbitMQ dependency -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
 		<!-- Mysql 依赖 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -86,6 +92,7 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.3</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
